@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<table class="table table-bordered table-hover">
+    <thead>
+        <th>Symbol</th>
+        <th>Shares</th>
+        <th>Price</th>
+        <th>Total</th>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{transaction.symbol}}</td>
+            <td>{{transaction.num_shares}}</td>
+            <td>{{transaction.price | usd}}</td>
+            <td>{{ (transaction.price * transaction.num_shares)  | usd }}</td>
+            <td>{{ transaction.timestamp }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>Balance:</td>
+            <td> {{ total_cash | usd }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
